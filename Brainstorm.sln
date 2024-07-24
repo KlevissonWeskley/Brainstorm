@@ -5,7 +5,9 @@ VisualStudioVersion = 17.10.34916.146
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{5B3CAC8B-5F02-4DCD-AA1F-13947F7E367F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Brainstorm.Data", "src\Brainstorm.Data\Brainstorm.Data.csproj", "{77BB0F7F-DD46-40B8-BE99-831E6058CD50}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Brainstorm.Data", "src\Brainstorm.Data\Brainstorm.Data.csproj", "{77BB0F7F-DD46-40B8-BE99-831E6058CD50}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Brainstorm.Communication", "src\Brainstorm.Communication\Brainstorm.Communication.csproj", "{13BA499D-15F6-449B-B844-CFFCB7AD45F7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,12 +19,17 @@ Global
 		{77BB0F7F-DD46-40B8-BE99-831E6058CD50}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{77BB0F7F-DD46-40B8-BE99-831E6058CD50}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{77BB0F7F-DD46-40B8-BE99-831E6058CD50}.Release|Any CPU.Build.0 = Release|Any CPU
+		{13BA499D-15F6-449B-B844-CFFCB7AD45F7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{13BA499D-15F6-449B-B844-CFFCB7AD45F7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{13BA499D-15F6-449B-B844-CFFCB7AD45F7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{13BA499D-15F6-449B-B844-CFFCB7AD45F7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{77BB0F7F-DD46-40B8-BE99-831E6058CD50} = {5B3CAC8B-5F02-4DCD-AA1F-13947F7E367F}
+		{13BA499D-15F6-449B-B844-CFFCB7AD45F7} = {5B3CAC8B-5F02-4DCD-AA1F-13947F7E367F}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {737CF3CD-6F80-4B64-832E-122BD0DECF95}

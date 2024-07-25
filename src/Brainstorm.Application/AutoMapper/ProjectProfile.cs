@@ -10,6 +10,8 @@ public class ProjectProfile : Profile
     public ProjectProfile()
     {
         CreateMap<CreateProjectRequest, Project>();
+        CreateMap<UpdateProjectRequest, Project>();
+
         CreateMap<Project, GetProjectShortResponse>();
 
         CreateMap<Project, GetProjectsResponse>()

@@ -6,15 +6,10 @@ namespace Brainstorm.Data.Context;
 
 public class BrainstormDbContext : IdentityDbContext<Student>
 {
-    private string _connection = "Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=BraistormDb;Integrated Security=True;Connect Timeout=30;Encrypt=False;Trust Server Certificate=False;Application Intent=ReadWrite;Multi Subnet Failover=False";
-    
+    public BrainstormDbContext(DbContextOptions<BrainstormDbContext> opts) : base(opts) { }
+
     public DbSet<Project> Projects { get; set; }
     public DbSet<Rating> Ratings { get; set; }
-
-    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-    {
-        optionsBuilder.UseSqlServer(_connection);
-    }
 
     protected override void OnModelCreating(ModelBuilder builder)
     {

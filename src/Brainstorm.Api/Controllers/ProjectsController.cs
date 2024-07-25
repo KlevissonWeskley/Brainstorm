@@ -1,14 +1,16 @@
 ﻿using AutoMapper;
+using Azure.Core;
 using Brainstorm.Application.UseCases.Projects.Create;
+using Brainstorm.Application.UseCases.Projects.Delete;
 using Brainstorm.Application.UseCases.Projects.GetAll;
 using Brainstorm.Application.UseCases.Projects.GetById;
+using Brainstorm.Application.UseCases.Projects.Update;
 using Brainstorm.Communication.Requests;
 using Brainstorm.Data.Context;
+using Brainstorm.Exceptions.ExceptionsBase;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Brainstorm.Api.Controllers;
-
-// Continuar com CRUD de projetos, avaliações e login de alunos 
 
 [Route("api/[controller]")]
 [ApiController]
@@ -36,25 +38,18 @@ public class ProjectsController : ControllerBase
         }
         catch (Exception ex)
         {
-            throw new ApplicationException(ex.Message);
+            return BadRequest(ex.Message);
         }
     }
 
     [HttpGet]
     public IActionResult GetAll()
     {
-        try
-        {
-            var useCase = new GetAllProjectsUseCase(_dbContext, _mapper);
+        var useCase = new GetAllProjectsUseCase(_dbContext, _mapper);
 
-            var result = useCase.Execute();
+        var result = useCase.Execute();
 
-            return Ok(result);
-        }
-        catch (Exception ex)
-        {
-            throw new ApplicationException(ex.Message);
-        }
+        return Ok(result);
     }
 
     [HttpGet("{id}")]
@@ -68,9 +63,43 @@ public class ProjectsController : ControllerBase
 
             return Ok(result);
         }
-        catch (Exception ex)
+        catch (NotFoundException ex)
         {
-            throw new ApplicationException(ex.Message);
+           return NotFound(ex.Message);
+        }
+    }
+
+    [HttpPatch("{id}")]
+    public async Task<IActionResult> Update(int id, [FromBody] UpdateProjectRequest request)
+    {
+        try
+        {
+            var useCase = new UpdateProjectUseCase(_dbContext, _mapper);
+
+            await useCase.Execute(id, request);
+
+            return NoContent();
+        }
+        catch (NotFoundException ex)
+        {
+            return NotFound(ex.Message);
+        }
+    }
+
+    [HttpDelete("{id}")]
+    public async Task<IActionResult> Delete(int id)
+    {
+        try
+        {
+            var useCase = new DeleteProjectUseCase(_dbContext);
+
+            await useCase.Execute(id);
+
+            return NoContent();
+        }
+        catch (NotFoundException ex)
+        {
+            return NotFound(ex.Message);
         }
     }
 }

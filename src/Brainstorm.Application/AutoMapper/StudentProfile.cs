@@ -11,5 +11,6 @@ public class StudentProfile : Profile
     {
         CreateMap<CreateStudentRequest, Student>();
         CreateMap<Student, GetStudentResponse>();
+        CreateMap<Student, GetStudentShortResponse>();
     }
 }

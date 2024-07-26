@@ -1,5 +1,7 @@
 using Brainstorm.Application.UseCases.Students.Authenticate;
 using Brainstorm.Application.UseCases.Students.Create;
+using Brainstorm.Application.UseCases.Students.Delete;
+using Brainstorm.Application.UseCases.Students.GetAll;
 using Brainstorm.Application.UseCases.Students.Login;
 using Brainstorm.Data.Context;
 using Brainstorm.Data.Entities;
@@ -53,8 +55,11 @@ builder.Services.AddAuthentication(options =>
 
 builder.Services.AddAuthorization();
 
+// Students Use Cases 
 builder.Services.AddScoped<CreateStudentUseCase>();
 builder.Services.AddScoped<AuthenticateStudentUseCase>();
+builder.Services.AddScoped<GetAllStudentsUseCase>();
+builder.Services.AddScoped<DeleteAccountUseCase>();
 builder.Services.AddScoped<TokenService>();
 
 var app = builder.Build();

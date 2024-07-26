@@ -5,9 +5,11 @@ using Brainstorm.Application.UseCases.Projects.Delete;
 using Brainstorm.Application.UseCases.Projects.GetAll;
 using Brainstorm.Application.UseCases.Projects.GetById;
 using Brainstorm.Application.UseCases.Projects.Update;
+using Brainstorm.Application.UseCases.Ratings.Create;
 using Brainstorm.Communication.Requests;
 using Brainstorm.Data.Context;
 using Brainstorm.Exceptions.ExceptionsBase;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Brainstorm.Api.Controllers;
@@ -25,6 +27,7 @@ public class ProjectsController : ControllerBase
         _mapper = mapper;
     }
 
+    [Authorize]
     [HttpPost]
     public async Task<IActionResult> Create([FromBody] CreateProjectRequest request)
     {
@@ -42,6 +45,7 @@ public class ProjectsController : ControllerBase
         }
     }
 
+    [Authorize]
     [HttpGet]
     public IActionResult GetAll()
     {
@@ -52,6 +56,7 @@ public class ProjectsController : ControllerBase
         return Ok(result);
     }
 
+    [Authorize]
     [HttpGet("{id}")]
     public IActionResult GetById(int id)
     {
@@ -69,6 +74,7 @@ public class ProjectsController : ControllerBase
         }
     }
 
+    [Authorize]
     [HttpPatch("{id}")]
     public async Task<IActionResult> Update(int id, [FromBody] UpdateProjectRequest request)
     {
@@ -86,6 +92,7 @@ public class ProjectsController : ControllerBase
         }
     }
 
+    [Authorize]
     [HttpDelete("{id}")]
     public async Task<IActionResult> Delete(int id)
     {
@@ -100,6 +107,24 @@ public class ProjectsController : ControllerBase
         catch (NotFoundException ex)
         {
             return NotFound(ex.Message);
+        }
+    }
+
+    [Authorize]
+    [HttpPost("rating")]
+    public async Task<IActionResult> Rating(CreateRatingRequest request)
+    {
+        try
+        {
+            var useCase = new CreateRatingUseCase(_dbContext, _mapper);
+
+            var result = await useCase.Execute(request);
+
+            return Created(string.Empty, result);
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(500, ex.Message);
         }
     }
 }

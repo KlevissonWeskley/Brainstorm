@@ -61,6 +61,15 @@ namespace Brainstorm.Exceptions.ExceptionsBase {
         }
         
         /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Invalid password..
+        /// </summary>
+        public static string INVALID_PASSWORD {
+            get {
+                return ResourceManager.GetString("INVALID_PASSWORD", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a Project not found..
         /// </summary>
         public static string PROJECT_NOT_FOUND {

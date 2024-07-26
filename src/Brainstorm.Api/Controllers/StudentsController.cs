@@ -1,7 +1,10 @@
 ﻿using Brainstorm.Application.UseCases.Students.Authenticate;
 using Brainstorm.Application.UseCases.Students.Create;
+using Brainstorm.Application.UseCases.Students.Delete;
+using Brainstorm.Application.UseCases.Students.GetAll;
 using Brainstorm.Communication.Requests;
 using Brainstorm.Exceptions.ExceptionsBase;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Brainstorm.Api.Controllers;
@@ -10,13 +13,23 @@ namespace Brainstorm.Api.Controllers;
 [ApiController]
 public class StudentsController : ControllerBase
 {
-    private CreateStudentUseCase _studentUseCase;
+    private CreateStudentUseCase _createStudentUseCase;
     private AuthenticateStudentUseCase _authenticateStudentUseCase;
+    private GetAllStudentsUseCase _getAllStudentsUseCase;
+    private DeleteAccountUseCase _deleteAccountUseCase;
 
-    public StudentsController(CreateStudentUseCase studentUseCase, AuthenticateStudentUseCase authenticateStudentUseCase)
+    public StudentsController
+    (
+        CreateStudentUseCase studentUseCase, 
+        AuthenticateStudentUseCase authenticateStudentUseCase, 
+        GetAllStudentsUseCase getAllStudentsUseCase, 
+        DeleteAccountUseCase deleteAccountUseCase
+    )
     {
-        _studentUseCase = studentUseCase;
+        _createStudentUseCase = studentUseCase;
         _authenticateStudentUseCase = authenticateStudentUseCase;
+        _getAllStudentsUseCase = getAllStudentsUseCase;
+        _deleteAccountUseCase = deleteAccountUseCase;
     }
 
     [HttpPost]
@@ -24,7 +37,7 @@ public class StudentsController : ControllerBase
     {
         try
         {
-            var result = await _studentUseCase.Execute(request);
+            var result = await _createStudentUseCase.Execute(request);
 
             return Created(string.Empty, result);
         }
@@ -42,6 +55,34 @@ public class StudentsController : ControllerBase
             var result = await _authenticateStudentUseCase.Execute(request);
 
             return Created(string.Empty, result);
+        }
+        catch (UnauthorizedException ex)
+        {
+            return Unauthorized(ex.Message);
+        }
+    }
+
+    [HttpGet]
+    public IActionResult GetAll()
+    {
+        var result = _getAllStudentsUseCase.Execute();
+
+        return Ok(result);
+    }
+
+    [Authorize]
+    [HttpDelete("deleteAccount/{id}")]
+    public async Task<IActionResult> Delete(string id, [FromBody] DeleteAccountRequest request)
+    {
+        try
+        {
+            await _deleteAccountUseCase.Execute(id, request);
+
+            return NoContent();
+        }
+        catch (NotFoundException ex)
+        {
+            return NotFound(ex.Message);
         }
         catch (UnauthorizedException ex)
         {

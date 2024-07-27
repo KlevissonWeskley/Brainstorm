@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Brainstorm.Application.UseCases.Students.Login;
 using Brainstorm.Communication.Requests;
 using Brainstorm.Communication.Responses;
 using Brainstorm.Data.Entities;
@@ -26,7 +27,7 @@ public class CreateStudentUseCase
 
         var student = _mapper.Map<Student>(request);
 
-        var result = await _userManager.CreateAsync(student, request.Password);
+        await _userManager.CreateAsync(student, request.Password);
 
         return _mapper.Map<GetStudentResponse>(student);
     }

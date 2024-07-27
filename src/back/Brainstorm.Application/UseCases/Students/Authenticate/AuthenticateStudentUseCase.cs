@@ -8,13 +8,11 @@ namespace Brainstorm.Application.UseCases.Students.Authenticate;
 
 public class AuthenticateStudentUseCase
 {
-    private UserManager<Student> _userManager;
     private SignInManager<Student> _signInManager;
     private TokenService _tokenService;
 
-    public AuthenticateStudentUseCase(UserManager<Student> userManager, SignInManager<Student> signInManager, TokenService tokenService)
+    public AuthenticateStudentUseCase(SignInManager<Student> signInManager, TokenService tokenService)
     {
-        _userManager = userManager;
         _signInManager = signInManager;
         _tokenService = tokenService;
     }

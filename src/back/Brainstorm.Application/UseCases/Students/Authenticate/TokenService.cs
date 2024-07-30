@@ -21,7 +21,7 @@ public class TokenService
         var claims = new Claim[]
         {
             new Claim("username", student.UserName!),
-            new Claim("id", student.Id),
+            new Claim("sub", student.Id),
             new Claim("loginTimestamp", DateTime.UtcNow.ToString())
         };
 

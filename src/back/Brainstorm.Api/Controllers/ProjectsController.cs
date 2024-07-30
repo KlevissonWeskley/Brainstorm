@@ -45,7 +45,6 @@ public class ProjectsController : ControllerBase
         }
     }
 
-    [Authorize]
     [HttpGet]
     public IActionResult GetAll()
     {

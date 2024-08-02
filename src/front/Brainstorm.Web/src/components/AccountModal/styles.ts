@@ -70,7 +70,11 @@ export const Content = styled(Dialog.Content)`
             }
 
             &.loading {
-                opacity: 0.7;
+                opacity: 0.5;
+            }
+
+            .loadingGif {
+                width: 4rem;
             }
         }
 }

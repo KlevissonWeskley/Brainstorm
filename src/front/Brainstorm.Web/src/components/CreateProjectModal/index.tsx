@@ -5,13 +5,13 @@ import { FormEvent, useState } from "react"
 import Cookies from "js-cookie";
 import { jwtDecode } from "jwt-decode";
 import { api } from "../../services/api";
+import loadingGif from "../../assets/loading.gif"
 
 export function CreateProjectModal() {
     const [content, setContent] = useState('')
+    const [isLoading, setIsLoading] = useState(false)
 
-    async function createProject(e: FormEvent) {
-        e.preventDefault()
-
+    async function createProject() {
         try {
             const token = Cookies.get('token')
             const tokenDecoded = token ? jwtDecode(token) : null
@@ -33,6 +33,17 @@ export function CreateProjectModal() {
         }
     }
 
+    async function handleExecute(e: FormEvent) {
+        e.preventDefault()
+        setIsLoading(true)
+
+        try {
+            await createProject()
+        } finally {
+            setIsLoading(false)
+        }
+    }
+
     return (
         <Dialog.Portal>
             <Overlay />
@@ -44,7 +55,7 @@ export function CreateProjectModal() {
                     <X size={24} />
                 </CloseButton>
 
-                <form onSubmit={createProject}>
+                <form onSubmit={handleExecute}>
                     <input 
                         type="text" 
                         placeholder='Conteúdo' 
@@ -53,7 +64,9 @@ export function CreateProjectModal() {
                         required
                     />
 
-                    <button type='submit'>Enviar</button>
+                    <button type='submit' className={isLoading ? 'loading' : ''}>
+                        {isLoading ? <img className="loadingGif" src={loadingGif} alt="Loading..." /> : 'Enviar'}
+                    </button>
                 </form>
             </Content>
         </Dialog.Portal>

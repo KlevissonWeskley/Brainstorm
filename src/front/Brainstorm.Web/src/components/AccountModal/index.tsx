@@ -1,17 +1,19 @@
 import * as Dialog from "@radix-ui/react-dialog"
 import { CloseButton, Content, Overlay } from "./styles"
 import { X } from "phosphor-react"
-import { FormEvent } from "react";
+import { FormEvent, useState } from "react";
+import loadingGif from "../../assets/loading.gif"
 
 interface AccountModalProps {
     title: string;
-    execute: (e: FormEvent) => void;
+    execute: (e: FormEvent) => Promise<void>;
     buttonFunction: string;
     username: string;
     setUsername: (username: string) => void;
     password: string;
     setPassword: (password: string) => void;
 }
+
 
 export function AccountModal({
     title,
@@ -22,6 +24,19 @@ export function AccountModal({
     password,
     setPassword,
 } : AccountModalProps) {
+    const [isLoading, setIsLoading] = useState(false)
+
+    async function handleExecute(e: FormEvent) {
+        e.preventDefault()
+        setIsLoading(true)
+
+        try {
+            await execute(e)
+        } finally {
+            setIsLoading(false)
+        }
+    }
+
     function clear() {
         setUsername('')
         setPassword('')
@@ -38,7 +53,7 @@ export function AccountModal({
                     <X size={24} />
                 </CloseButton>
 
-                <form onSubmit={execute}>
+                <form onSubmit={handleExecute}>
                     <input 
                         type="text" 
                         placeholder='Nome de usuário' 
@@ -55,7 +70,9 @@ export function AccountModal({
                         required
                     />
 
-                    <button type='submit'>{buttonFunction}</button>
+                    <button type='submit' className={isLoading ? 'loading' : ''}>
+                        {isLoading ? <img className="loadingGif" src={loadingGif} alt="Loading..." /> : buttonFunction}
+                    </button>
                 </form>
             </Content>
         </Dialog.Portal>

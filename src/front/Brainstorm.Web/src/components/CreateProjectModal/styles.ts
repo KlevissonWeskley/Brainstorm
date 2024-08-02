@@ -72,6 +72,10 @@ export const Content = styled(Dialog.Content)`
             &.loading {
                 opacity: 0.7;
             }
+
+            .loadingGif {
+                width: 4rem;
+            }
         }
 }
 `

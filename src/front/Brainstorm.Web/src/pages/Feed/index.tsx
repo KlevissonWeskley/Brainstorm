@@ -3,24 +3,15 @@ import { ProfileSidebar } from "../../components/ProfileSidebar";
 import { SidebarContainer } from "../../components/ProfileSidebar/styles";
 import { FeedPageContainer } from "./styles";
 import { IProjectProps } from "../../interfaces/IProjectProps";
-import Cookies from "js-cookie";
 import { api } from "../../services/api";
 import { Project } from "../../components/Project";
 
 export function Feed() {
     const [projects, setProjects] = useState<IProjectProps[]>([]);
 
-    const token = Cookies.get('token')
-
     async function loadProjects() {
         try {
-            const reply = await api.get('/projects', 
-                {
-                    headers: {
-                        Authorization: `Bearer ${token}`
-                    }
-                }
-            )
+            const reply = await api.get('/projects')
 
             setProjects(reply.data)
         } catch (err) {
@@ -42,13 +33,14 @@ export function Feed() {
                 {projects.length > 0 ? projects.map(project => {
                     return (
                         <Project 
+                            projectId={project.id}
                             username={project.student.username}
                             ratings={project.ratings}
                             content={project.content}
                         />
                     )
                 }) : (
-                    <p>Nenhum projeto encontrado</p>
+                    <p className="projectsNotFound">Nenhum projeto encontrado.</p>
                 )} 
             </div>
         </FeedPageContainer>

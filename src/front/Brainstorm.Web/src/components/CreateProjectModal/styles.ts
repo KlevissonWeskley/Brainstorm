@@ -65,10 +65,6 @@ export const Content = styled(Dialog.Content)`
                 background: ${props => props.theme['purple-300']};
             }
 
-            img {
-                width: 10rem;
-            }
-
             &.loading {
                 opacity: 0.7;
             }

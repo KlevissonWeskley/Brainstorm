@@ -1,4 +1,5 @@
 import styled from "styled-components"
+import * as Dialog from "@radix-ui/react-dialog"
 
 export const ProjectsContainer = styled.section`
     display: flex;
@@ -60,6 +61,11 @@ export const ProjectHeader = styled.header`
         flex-direction: column;
         gap: 0.5rem;
     }
+
+    .averageRating {
+        display: flex;
+        flex-direction: column;
+    }
 `
 
 export const RatingButton = styled.button`
@@ -67,5 +73,12 @@ export const RatingButton = styled.button`
     border: 0;
     color: ${props => props.theme['green-300']};
     font-weight: bold;
+    cursor: pointer;
+`
+
+export const DeleteProjectButton = styled(Dialog.Trigger)`
+    background: transparent;
+    border: 0;
+    color: ${props => props.theme['red-300']};
     cursor: pointer;
 `

@@ -11,6 +11,7 @@ public class BrainstormDbContext : IdentityDbContext<Student>
     public DbSet<Project> Projects { get; set; }
     public DbSet<Rating> Ratings { get; set; }
 
+    // TODO: Resolver erro de deleção em cascata dos projetos
     protected override void OnModelCreating(ModelBuilder builder)
     {
         base.OnModelCreating(builder); 
@@ -25,6 +26,6 @@ public class BrainstormDbContext : IdentityDbContext<Student>
             .HasMany(p => p.Ratings)
             .WithOne(r => r.Project)
             .HasForeignKey(r => r.ProjectId)
-            .OnDelete(DeleteBehavior.NoAction);
+            .OnDelete(DeleteBehavior.Cascade);
     }
 }

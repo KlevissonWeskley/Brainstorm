@@ -11,6 +11,9 @@ export function CreateProjectModal() {
     const [content, setContent] = useState('')
     const [isLoading, setIsLoading] = useState(false)
 
+    const CONTENT_MIN_LENGTH = 5
+    const CONTENT_MAX_LENGTH = 250
+
     async function createProject() {
         try {
             const token = Cookies.get('token')
@@ -25,9 +28,11 @@ export function CreateProjectModal() {
                 {
                     headers: {
                         Authorization: `Bearer ${token}`
-                    }
+                    }   
                 }
             )
+
+            window.location.reload()
         } catch (err) {
             console.log('Create Project Erro: ', err)
         }
@@ -64,7 +69,11 @@ export function CreateProjectModal() {
                         required
                     />
 
-                    <button type='submit' className={isLoading ? 'loading' : ''}>
+                    <button 
+                        type='submit' 
+                        className={isLoading ? 'loading' : ''} 
+                        disabled={content.length < CONTENT_MIN_LENGTH || content.length > CONTENT_MAX_LENGTH}
+                    >
                         {isLoading ? <img className="loadingGif" src={loadingGif} alt="Loading..." /> : 'Enviar'}
                     </button>
                 </form>

@@ -16,6 +16,15 @@ export const FeedPageContainer = styled.div`
         gap: 2rem;
     }
 
+    .projectsNotFound {
+        width: 100%;
+        height: 4rem;
+        background-color: ${props => props.theme['gray-500']};
+        display: flex;
+        align-items: center;
+        padding-left: 1rem;
+        border-radius: 6px;
+    }
 `
 
 export const SidebarContent = styled.div`

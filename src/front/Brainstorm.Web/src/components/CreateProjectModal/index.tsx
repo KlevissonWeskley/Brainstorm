@@ -1,5 +1,5 @@
 import * as Dialog from "@radix-ui/react-dialog"
-import { CloseButton, Content, Overlay } from "./styles"
+import { CloseButton, Content, Overlay, Title } from "./styles"
 import { X } from "phosphor-react"
 import { FormEvent, useState } from "react"
 import Cookies from "js-cookie";
@@ -54,7 +54,7 @@ export function CreateProjectModal() {
             <Overlay />
 
             <Content>
-                <Dialog.Title>Compartilhe seu projeto</Dialog.Title>
+                <Title>Compartilhe seu projeto</Title>
                 
                 <CloseButton>
                     <X size={24} />

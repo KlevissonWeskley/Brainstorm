@@ -5,9 +5,11 @@ import { FeedPageContainer } from "./styles";
 import { IProjectProps } from "../../interfaces/IProjectProps";
 import { api } from "../../services/api";
 import { Project } from "../../components/Project";
+import { HeaderMobile } from "../../components/HeaderMobile";
 
 export function Feed() {
     const [projects, setProjects] = useState<IProjectProps[]>([]);
+    const [isMobile, setIsMobile] = useState(false)
 
     async function loadProjects() {
         try {
@@ -21,13 +23,29 @@ export function Feed() {
 
     useEffect(() => {
         loadProjects()
+
+        const checkMobileScreen = () => {
+            setIsMobile(window.innerWidth <= 768)
+        }
+
+        checkMobileScreen()
+
+        window.addEventListener('resize', checkMobileScreen)
+
+        return () => window.removeEventListener('resize', checkMobileScreen)
     }, [])
 
     return (
         <FeedPageContainer>
-            <SidebarContainer>
-                <ProfileSidebar />
-            </SidebarContainer>
+            {
+                isMobile ? (
+                    <HeaderMobile />
+                ) : (
+                    <SidebarContainer>
+                        <ProfileSidebar />
+                    </SidebarContainer>
+                )
+            }
 
             <div className="projects">
                 {projects.length > 0 ? projects.map(project => {

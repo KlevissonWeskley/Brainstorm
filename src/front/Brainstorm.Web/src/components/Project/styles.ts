@@ -5,6 +5,10 @@ export const ProjectsContainer = styled.section`
     display: flex;
     flex-direction: column;
     gap: 2rem;
+
+    @media (max-width: 768px) {
+        width: 92vw;
+    }
 `
 
 export const ProjectContent = styled.div`
@@ -24,6 +28,16 @@ export const ProjectContent = styled.div`
         border-bottom-left-radius: 8px;
         border-bottom-right-radius: 8px;
         padding: 1.5rem;
+    }
+
+    @media (max-width: 768px) {
+        .userInfo span {
+            font-size: 12px;
+        }
+
+        .ratings span {
+            font-size: 12px;
+        }
     }
 `
 

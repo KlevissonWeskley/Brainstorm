@@ -1,4 +1,4 @@
-import { Avatar, DeleteProjectButton, ProjectContent, ProjectHeader, ProjectsContainer, RatingButton } from "./styles";
+import { DeleteProjectButton, ProjectContent, ProjectHeader, ProjectsContainer, RatingButton } from "./styles";
 import * as Dialog from '@radix-ui/react-dialog'
 import Cookies from "js-cookie";
 import { jwtDecode } from "jwt-decode";
@@ -9,6 +9,7 @@ import { api } from "../../services/api";
 import { Trash } from "phosphor-react";
 import { DeleteProjectModal } from "../DeleteProjectModal";
 import Rating from '@mui/material/Rating'
+import { Avatar } from "../Avatar";
 
 interface ProjectDataProps {
     projectId: number
@@ -51,7 +52,7 @@ export function Project({ projectId, username, ratings, content }: ProjectDataPr
             <ProjectContent>
                 <ProjectHeader>
                     <div className="userInfo">
-                        <Avatar>{username[0].toUpperCase()}</Avatar>
+                        <Avatar username={username} />
 
                         <span>{username}</span>
                     </div>

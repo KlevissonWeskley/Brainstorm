@@ -46,20 +46,6 @@ export const Profile = styled.div`
     }
 `
 
-export const Avatar = styled.div`
-    box-sizing: initial;
-    width: 4rem;
-    height: 4rem;
-    border-radius: 50%;
-    background-color: ${props => props.theme['purple-300']};
-    outline: 3px solid ${props => props.theme['green-500']};  
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 1.5rem;
-    font-weight: 500;
-` 
-
 const BaseButton = styled.button`
     width: 12rem;
     height: 3rem;

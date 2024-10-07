@@ -1,7 +1,6 @@
 import * as Dialog from '@radix-ui/react-dialog'
 import { useAuth } from '../../context/AuthContext'
 import { 
-    Avatar, 
     ButtonLogout, 
     ButtonNewIdea,
     Cover, 
@@ -11,6 +10,7 @@ import {
 
 import { SignOut } from 'phosphor-react'
 import { CreateProjectModal } from '../CreateProjectModal'
+import { Avatar } from '../Avatar'
 
 export function ProfileSidebar() {
     const { logout, username } = useAuth()
@@ -20,7 +20,7 @@ export function ProfileSidebar() {
             <Cover></Cover>
 
             <Profile>
-                <Avatar>{username ? username[0].toUpperCase() : null}</Avatar>
+                <Avatar username={username} />
                 <strong>{username}</strong>
             </Profile>
 

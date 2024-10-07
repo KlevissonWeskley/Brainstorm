@@ -25,6 +25,18 @@ export const FeedPageContainer = styled.div`
         padding-left: 1rem;
         border-radius: 6px;
     }
+
+    @media (max-width: 768px) {
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+        margin: 0;
+        padding: 0;
+
+        .projects {
+            padding: 0 1rem;
+        }
+    }
 `
 
 export const SidebarContent = styled.div`

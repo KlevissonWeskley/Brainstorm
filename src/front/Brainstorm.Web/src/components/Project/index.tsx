@@ -62,7 +62,7 @@ export function Project({ projectId, username, ratings, content }: ProjectDataPr
                         </span>
                         <span className="averageRating">
                             <span>
-                                <strong>Média:</strong> {averageRating}
+                                <strong>Média:</strong> {ratings.length <= 0 ? '0' : `${averageRating}`} 
                             </span>
                             <Rating className="ratingStars" name="half-rating-read" defaultValue={parseFloat(averageRating)} precision={0.5} readOnly />
                         </span>

@@ -10,7 +10,8 @@ export const Overlay = styled(Dialog.Overlay)`
 `
 
 export const Content = styled(Dialog.Content)`
-    min-width: 32rem;
+    width: 90%;
+    max-width: 32rem;
     border-radius: 6px;
     padding: 2.5rem 3rem;
     background: ${props => props.theme['gray-700']};
@@ -19,6 +20,10 @@ export const Content = styled(Dialog.Content)`
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+
+    @media (max-width: 768px) {
+        max-width: 24rem;
+    }
 
     form {
         margin-top: 2rem;
@@ -42,7 +47,11 @@ export const Content = styled(Dialog.Content)`
         span {
             color: ${props => props.theme['yellow-300']};
         }
-}
+    }
+
+    @media (max-width: 768px) {
+        max-width: 80vw;
+    }
 `
 
 export const SendRatingButton = styled.button`
